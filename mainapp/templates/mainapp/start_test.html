@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/start_test.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+</head>
+
+<body>
+    <div>
+        <h1 id="h1_el">{{index_question}} вопрос:</h1>
+        <h2>{{question.text}}</h2>
+
+        {% if last_question %}
+        <form action="{%url 'mainapp:result'%}" id = "question_form">
+            <input type="hidden" name="question" value="{{question.id}}">
+            <input type="hidden" name="test" value="{{test_id}}">
+            {% for answer in answers_list %}
+                <div>
+                    <input type="radio" name="answer" id="" value="{{answer.id}}">
+                    <label for=""><b>{{answer.text}}</b></label>
+                </div>
+            {% endfor %}
+            <button type="submit" id="submit_btn" class="submit_btn" disabled><b>Проверить</b></button>
+        </form>
+        {% else %}
+            <form action="{%url 'mainapp:start_test' index_question%}" id = "question_form">
+                <input type="hidden" name="question" value="{{question.id}}">
+                <input type="hidden" name="test" value="{{test_id}}">
+                {% for answer in answers_list %}
+                <div>
+                    <input type="radio" name="answer" id="" value="{{answer.id}}">
+                    <label for=""><b>{{answer.text}}</b></label>
+                </div>
+                {% endfor %}
+                <button type="submit" id="submit_btn" class="submit_btn" disabled><b>Далее</b></button>
+                
+            </form>
+        {% endif %}
+
+
+    </div>
+
+
+</body>
+<script>
+    // let question_form = document.getElementById('question_form')
+    // question_form.addEventListener('change', enableChange)
+
+    // function enableChange(){
+        // let submit_btn = document.getElementById('submit_btn')
+        // submit_btn.disabled = false
+    // }
+    $('#question_form').change(() => {
+        // $('#submit_btn').attr({'disabled':'false'})
+        let submit_btn = document.getElementById('submit_btn');
+        submit_btn.disabled = false;
+    })
+</script>
+
+</html>

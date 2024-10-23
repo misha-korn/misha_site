@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+</head>
+
+<body>
+    <h1><b>Калькулятор</b></h1>
+    <div class="heading1">
+        <a href="{%url 'mainapp:main'%}">Перейти на главную</a>
+    </div>
+
+
+    
+
+
+    <div class="container">
+        <form action="" class="form_calc">
+            <label for="">Введите пример</label>
+            <input type="text" name="text_calc" value="{{text_calc}}">
+            <input type="submit" value="ок">
+        </form>
+        <div class="answer">
+            <h2>Ответ: {{answer}}</h2>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

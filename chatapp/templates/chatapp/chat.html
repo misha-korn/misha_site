@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Это чат</title>
+        <link rel="stylesheet" href="{% static 'css/iq_test.css' %}" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>Главная</h1>
+            <a href="{%url 'chatapp:login'%}">
+                <div>
+                    <p>Войти</p>
+                </div>
+            </a>
+            <a href="{%url 'chatapp:messenger'%}">
+                <div>
+                    <p>Чат</p>
+                </div>
+            </a>
+            <a href="{%url 'chatapp:profile'%}">
+                <div>
+                    <p>Профиль</p>
+                </div>
+            </a>
+            <a href="{%url 'chatapp:exit'%}">
+                <div>
+                    <p>Выйти</p>
+                </div>
+            </a>
+        </header>
+
+        <main>
+            <h1>Чат</h1>
+            <div class="content-chat">
+                <div class="chats">
+                    <div class="search_user">
+                        <form class="search_username" method="GET">
+                            <input type="text" name="username" value="" />
+                            <button type="submit">Найти</button>
+                        </form>
+                        <div class="search_result">
+
+                        </div>
+                    </div>
+                    {%for chat in user_chats%}
+                    <!-- {{chat.chat.id}}
+                {{chat_id}} -->
+                    <a href="?mess={{chat.chat.id}}">
+                        {% if chat.chat.id == chat_id %}
+                        <div class="chat_selected">
+                            <h1>{{chat.user.username}}</h1>
+                        </div>
+                        {% else %}
+                        <div class="chat">
+                            <h1>{{chat.user.username}}</h1>
+                        </div>
+                        {% endif %}
+                    </a>
+
+                    {%endfor%}
+                </div>
+
+                <div class="messages-block">
+                    <div class="messages">
+                        {%for message in message_chat%} 
+                        {% if message.user == req_user%}
+                        <div class="messages_your">
+                            <div class="message">
+                                <h1>{{message.text}}</h1>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="messages_companion">
+                            <div class="message">
+                                <h1>{{message.text}}</h1>
+                            </div>
+                        </div>
+                        {% endif %} 
+                        {%endfor%}
+                    </div>
+
+                    <form class="send_message" method="post">
+                        {% csrf_token %}
+                        <input
+                            type="hidden"
+                            name="chat_id"
+                            value="{{chat_id}}"
+                        />
+                        <input type="text" name="message" value="" />
+                        <button type="submit">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script>
+            $('.search_username').submit(function (event){
+                event.preventDefault()
+                $.ajax({
+                    type: "GET",
+                    url: "/chat/chat_search_user",
+                    data: {
+                        username: $('input[name=username]').val(), 
+                    },
+                    success: function (data){
+                        console.log(data)
+                        $('.search_result').empty()
+                        let users_list = data.users
+                        for (i in users_list){
+                            let block = `<a href="/chat/create_chat?id1=${users_list[i].id}&id2={{req_user.id}}"><div>${users_list[i].username}</div></a>`
+                            $('.search_result').append(block)
+                        }
+                    }
+
+                })
+            })
+            $('.send_message').submit(function (event){
+                event.preventDefault()
+                $.ajax({
+                    type: "POST",
+                    url: "/chat/",
+                    data: {
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(), 
+                        chat_id: $('input[name=chat_id]').val(), 
+                        message: $('input[name=message]').val(), 
+                    },
+                    success: function (data){
+                        $('input[name=message]').val('')
+                    }
+
+                })
+            })
+            function get_messages_list() {
+                $.ajax({
+                    type: "GET",
+                    url: "get_messages",
+                    data: { chat_id: "{{chat_id}}" },
+                    success: function (data) {
+                        console.log(data);
+                        $(".messages").empty();
+                        let messages_list = data.messages;
+                        for (i in messages_list) {
+                            let message = messages_list[i];
+                            let req_user = "{{req_user.id}}";
+                            let message_class = "";
+
+                            if (req_user == message.user_id) {
+                                message_class = "messages_your";
+                            } else {
+                                message_class = "messages_companion";
+                            }
+                            let block = `<div class=${message_class}><div class="message"><h1>${message.text}</h1></div></div>`;
+                            $(".messages").append(block);
+                        }
+                    },
+                });
+            }
+            setInterval(get_messages_list, 5000);
+        </script>
+    </body>
+</html>

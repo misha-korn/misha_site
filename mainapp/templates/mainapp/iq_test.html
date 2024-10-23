@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/iq_test.css' %}">
+</head>
+
+<body>
+    <h1><b>Тест</b></h1>
+    <div class="heading1">
+        <a href="{%url 'mainapp:main'%}">Перейти на главную</a><br>
+    </div>
+    <div class="container">
+        <form action="{%url 'mainapp:start_test' 0%}"  class="form_calc">
+            <label for="">Введите имя</label>
+            <input type="text" name="name" value="{{name}}">
+            <input type="submit" value="начать тест">
+        </form>
+    </div>
+    
+
+    
+
+
+</body>
+
+</html>

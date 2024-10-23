@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><b>главная</b></title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+    <h1>Главная</h1>
+    <img src="https://mobimg.b-cdn.net/v3/fetch/60/60136e84e7fd3ae2eeb153747c92d786.jpeg" alt="Не удалось загрузить изображение..." width="1000px" height="auto">
+    <br>
+    <div class="heading2">
+        <a href="{%url 'mainapp:calculator'%}">Перейти на страницу калькулятора</a>
+    </div>
+    <div class="heading2">
+        <a href="{%url 'mainapp:iq_test'%}">Перейти на страницу теста</a>
+    </div>
+    <div class="heading2">
+        <a href="{%url 'chatapp:chat'%}">Зайти в чат</a>
+    </div>
+    
+    
+</body>
+
+</html>

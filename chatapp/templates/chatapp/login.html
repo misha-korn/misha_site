@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Войти</title>
+    <link rel="stylesheet" href="{% static 'css/iq_test.css' %}">
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{login_form.as_p}}
+        <button type="submit"><b>Войти</b></button>
+    </form>
+    <a href="{%url 'chatapp:registr'%}">
+        <div>
+            <p>Регистрация</p>
+        </div>
+    </a>
+</body>
+</html>

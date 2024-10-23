@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/start_test.css' %}">
+</head>
+<body>
+
+    <h1><i>Вы решили верно {{correct_answers}}% теста.</i></h1>
+
+    <div class="heading1">
+        <a href="{%url 'mainapp:main'%}">Перейти на главную</a><br>
+    </div>
+    
+    {% for  your_answer in your_answers%}
+        <div>
+            <h2>{{your_answer.question.text}}</h2>
+            {% for answer in all_answers %}
+                {% if answer.question == your_answer.question%}
+                    {% if answer.text == your_answer.answer.text %}
+                        {% if your_answer.answer.correct %}
+                            <li style="color:#005500"><h3>{{answer.text}}</h3></li>
+                        {% else  %}
+                            <li style="color:#550000"><h3>{{answer.text}}</h3></li>
+                        {% endif %}
+                    {% else %}
+                        <li><h3>{{answer.text}}</h3></li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+    
+</body>
+</html>
