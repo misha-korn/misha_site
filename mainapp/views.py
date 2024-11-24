@@ -27,10 +27,61 @@ def main(request):
 def calculator_f(request):
     context = {"answer": ""}
     text_calc = request.GET.get("text_calc")
+    count_drob = request.GET.get("count_drob")
+    chisl = []
+    znam = []
+    znak = []
+    cel = []
     if text_calc:
         # считаем
         answer = message_processing(text_calc)
         context = {"answer": answer, "text_calc": text_calc}
+    elif count_drob:
+        print(request.GET)
+        for i in range(int(count_drob) - 1):
+            chisl.append(request.GET.get("chisl" + str(i)))
+            znam.append(request.GET.get("znam" + str(i)))
+            znak.append(request.GET.get("znak" + str(i)))
+            print(request.GET.get("znak" + str(i)))
+            cel.append(request.GET.get("celoe" + str(i)))
+        chisl.append(request.GET.get("chisl" + str(i + 1)))
+        znam.append(request.GET.get("znam" + str(i + 1)))
+        cel.append(request.GET.get("celoe" + str(i + 1)))
+        text_primer = ""
+        for i in range(int(count_drob) - 1):
+            text_primer += chisl[i]
+            text_primer += "/"
+            text_primer += znam[i]
+            text_primer += " "
+            # print(znak[i], int(count_drob) - 1, znak)
+            text_primer += znak[i]
+            text_primer += " "
+        text_primer += chisl[i + 1]
+        text_primer += "/"
+        text_primer += znam[i + 1]
+        # print(chisl)
+        # print(znam)
+        # print(znak)
+        # print(text_primer)
+        answer2 = message_processing(text_primer)
+        znak.append("")
+        primer = [
+            [i, cel[i], chisl[i], znam[i], znak[i]] for i in range(int(count_drob))
+        ]
+
+        context = {
+            "answer2": answer2,
+            "text_primer": text_primer,
+            "primer": primer,
+            "znaki": ["+", "-", "*", "/"],
+        }
+    else:
+        primer = [[0, "", "", "", "+"], [1, "", "", "", ""]]
+        context = {
+            "primer": primer,
+            "znaki": ["+", "-", "*", "/"],
+        }
+
     return render(request, "mainapp/calculator.html", context=context)
 
 

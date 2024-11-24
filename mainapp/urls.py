@@ -9,4 +9,5 @@ urlpatterns = [
     path("iq_test/", iq_test, name="iq_test"),
     path("start_test/<int:n_que>/", start_test, name="start_test"),
     path("result/", result, name="result"),
+    
 ]

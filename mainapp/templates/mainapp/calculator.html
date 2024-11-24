@@ -1,37 +1,94 @@
+{% extends "mainapp/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+        
+{% block title %}Калькулятор misha-site{% endblock title %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'vendor/css/calculator.css' %}">
-</head>
+{% block css_add %}<link rel="stylesheet" href="{% static 'vendor/css/calculator.css' %}"/> {% endblock css_add %}
 
-<body>
-    <h1><b>Калькулятор</b></h1>
-    <div class="heading1">
-        <a href="{%url 'mainapp:main'%}">Перейти на главную</a>
+{% block content %}
+<h1><b>Калькулятор</b></h1>
+<div class="heading1">
+    <a href="{%url 'mainapp:main'%}" class="btn btn-primary">Перейти на главную</a>
+</div>
+
+<div class="container">
+    <form action="" class="form_calc">
+        <label for="">Введите пример</label>
+        <input type="text" name="text_calc" value="{{text_calc}}" />
+        <input type="submit" value="ок" />
+    </form>
+    <div class="answer">
+        <h2>Ответ: {{answer}}</h2>
     </div>
+</div>
 
+<div class="container">
+    
+    <h1 >Введите пример</h1>
+    <form action="" class="form_calc_drob">
+        <input type="hidden" name="count_drob" value="2" id="count_drob">
+        {% for n, celoe, chisl, znam, znak_sel in primer%}
+            <div class="smeshannoe">
+                <input type="text" class="celoe" name="celoe{{n}}" value="{{celoe}}"> 
+                <div class="drob">
+                    <div class="chisl"> 
+                        <input type="text" name="chisl{{n}}" value="{{chisl}}" />
+                    </div>
+                    <div class="znam">
+                        <input type="text" name="znam{{n}}" value="{{znam}}" />
+                    </div>
+                </div>
+            </div>
+            {% if znak_sel %}
+                <select name="znak{{n}}" class="znak">
+                    {% for znak in znaki%}
+                        <option value="{{znak}}" {% if znak == znak_sel %}selected{%endif%}>{{znak}}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+        {% endfor %}
+        <div class="signs">
+            <input type="submit" value="=" class="ravno"/>
+            <div class="buttons">
+                <button id="button_plus">
+                    +
+                </button>
+                <button id="button_minus">
+                    -
+                </button>
+            </div>
+        </div>
+    
+        
+    </form>
+    <div class="answer">
+        <h2>Ответ: {{answer2}}</h2>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+<script>
+    $('#button_plus').on('click', function (event){
+        event.preventDefault()
+        let count_drob = $('#count_drob').val()
+        let new_element = $(`<select name="znak${count_drob}" class="znak"><option value="+">+</option><option value="-">-</option><option value="*">*</option><option value="/">/</option></select>`)
+        new_element.insertBefore($('#button_plus'))
+        count_drob = +count_drob + 1
+        new_element = $(`<div class="smeshannoe"><input type="text" class="celoe" name="celoe${count_drob}" value=""><div class="drob"><div class="chisl"><input type="text" name="chisl${count_drob}" value="" /></div><div class="znam"><input type="text" name="znam${count_drob}" value="" /></div></div></div>`)
+        new_element.insertBefore($('#button_plus'))
+        $('#count_drob').val(count_drob)
+    })
+    $('#button_minus').on('click', function (event){
+        event.preventDefault()
+        $('.smeshannoe').last().remove()
+        $('.znak').last().remove()
+    })
+
+    
+</script>
+{% endblock script %}
 
     
 
-
-    <div class="container">
-        <form action="" class="form_calc">
-            <label for="">Введите пример</label>
-            <input type="text" name="text_calc" value="{{text_calc}}">
-            <input type="submit" value="ок">
-        </form>
-        <div class="answer">
-            <h2>Ответ: {{answer}}</h2>
-        </div>
-
-    </div>
-
-
-</body>
-
-</html>
