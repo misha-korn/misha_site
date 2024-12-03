@@ -33,8 +33,9 @@ body{
     /* width: 100%; */
 }
 .form_calc input{
-    font-size: 2rem;
+    /* font-size: 2rem; */
     /* width: 50%; */
+    
     
 }
 .answer{
@@ -49,23 +50,23 @@ body{
 
 
 .form_calc_drob{
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
-    column-gap: 30px;
+    justify-content: center; */
+    /* column-gap: 30px; */
 }
 
 .drob{
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 100px; */
 }
 
 .drob div{
     padding: 10px 0px;
 }
 .chisl input, .znam input{
-    font-size: 2rem;
+    /* font-size: 2rem; */
     /* width: 75px; */
 }
 .chisl{
@@ -80,32 +81,33 @@ body{
     width: 170px; */
 }
 .celoe{
-    font-size: 2rem;
-    /* width: 75px; */
+    /* font-size: 2rem; */
+    width: 3rem !important;
 }
 .znak{
-    font-size: 4rem;
-    padding: 5px 10px;
+    /* font-size: 4rem; */
+    /* padding: 5px 10px; */
 }
 .znak option{
-    font-size: 4rem;
+    /* font-size: 4rem; */
 }
 .buttons{
     align-self: end;
     display: flex;
-    justify-content: space-evenly;
-    column-gap: 1rem;
+    justify-content: space-between;
+    /* column-gap: 1rem; */
 }
 .signs{
     /* height: 100px; */
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     justify-content: end;
     /* row-gap: 20px; */
 }
 .ravno{
+    /* padding: 0 !important; */
     /* height: 30px; */
-    font-size: 1rem;
+    /* font-size: 1rem; */
 }
 
 input.form-control{
