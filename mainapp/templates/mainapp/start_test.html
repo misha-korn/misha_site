@@ -1,17 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+</html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'vendor/css/start_test.css' %}">
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-</head>
+{% extends "mainapp/base.html" %}
+{% block title %}Тест{% endblock title %} {% block content %}
 
-<body>
-    <div>
+<div class="container">
+    <div class="card">
         <h1 id="h1_el">{{index_question}} вопрос:</h1>
         <h2>{{question.text}}</h2>
 
@@ -44,22 +37,15 @@
 
 
     </div>
+</div>
 
-
-</body>
+{% endblock content %}
+{% block script %}
 <script>
-    // let question_form = document.getElementById('question_form')
-    // question_form.addEventListener('change', enableChange)
-
-    // function enableChange(){
-        // let submit_btn = document.getElementById('submit_btn')
-        // submit_btn.disabled = false
-    // }
     $('#question_form').change(() => {
         // $('#submit_btn').attr({'disabled':'false'})
         let submit_btn = document.getElementById('submit_btn');
         submit_btn.disabled = false;
     })
 </script>
-
-</html>
+{% endblock script %}

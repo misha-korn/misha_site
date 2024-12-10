@@ -1,19 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
-    <link rel="stylesheet" href="{% static 'vendor/css/iq_test.css' %}">
-</head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{registr_form.as_p}}
-        <button type="submit"><b>Зарегистрироваться</b></button>
-    </form>
+{% extends "mainapp/base.html" %}
+{% block title %}Тест{% endblock title %} {% block content %}
 
+<form action="" method="post">
+    {% csrf_token %}
+    {{registr_form.as_p}}
+    <button type="submit"><b>Зарегистрироваться</b></button>
+</form>
 
-</body>
-</html>
+{% endblock content %}

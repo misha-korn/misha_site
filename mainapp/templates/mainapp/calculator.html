@@ -29,7 +29,7 @@
 <div class="card p-4 text-center d-flex align-items-center flex-column col-12 col-md-12 col-lg-12">
     
     <h1 >Введите пример</h1>
-    <form action="" class="form_calc_drob d-flex mb-3 align-items-center flex-wrap gap-3">
+    <form action="" class="form_calc_drob d-flex mb-3 align-items-center flex-wrap gap-3 w-100 justify-content-center">
         <input type="hidden" name="count_drob" value="2" id="count_drob">
         {% for n, celoe, chisl, znam, znak_sel in primer%}
             <div class="smeshannoe d-flex align-items-center mb-3 col-lg-1 col-md-2 col-3 flex-nowrap">
@@ -44,7 +44,7 @@
                 </div>
             </div>
             {% if znak_sel %}
-            <div class="col-lg-1 col-md-1 col-2">
+            <div class="col-lg-1 col-md-2 col-2">
                 <select name="znak{{n}}" class="znak form-select" >
                     {% for znak in znaki%}
                         <option value="{{znak}}" {% if znak == znak_sel %} selected {%endif%} >
@@ -56,9 +56,9 @@
             </div>
             {% endif %}
         {% endfor %}
-        <div class="signs col-3 d-flex flex-column" id="signs">
+        <div class="signs col-lg-1 col-md-1 col-3 d-flex flex-column" id="signs">
             <input type="submit" value="=" class="ravno btn btn-primary"/>
-            <div class="buttons  d-flex ">
+            <div class="buttons w-100 d-flex ">
                 <button id="button_plus" class="btn btn-secondary">
                     +
                 </button>

@@ -1,30 +1,22 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'vendor/css/start_test.css' %}">
-</head>
-<body>
-
+{% extends "mainapp/base.html" %}
+{% block title %}Ваш результат{% endblock title %}
+{% block content %}
+<div class="container">
     <h1><i>Вы решили верно {{correct_answers}}% теста.</i></h1>
 
     <div class="heading1">
-        <a href="{%url 'mainapp:main'%}">Перейти на главную</a><br>
+        <a href="{%url 'mainapp:main'%}" class="btn btn-primary">Перейти на главную</a><br>
     </div>
-    
     {% for  your_answer in your_answers%}
-        <div>
+        <div class="card mb-3 p-3">
             <h2>{{your_answer.question.text}}</h2>
             {% for answer in all_answers %}
                 {% if answer.question == your_answer.question%}
                     {% if answer.text == your_answer.answer.text %}
                         {% if your_answer.answer.correct %}
-                            <li style="color:#005500"><h3>{{answer.text}}</h3></li>
+                            <li style="color:#00aa00"><h3>{{answer.text}}</h3></li>
                         {% else  %}
-                            <li style="color:#550000"><h3>{{answer.text}}</h3></li>
+                            <li style="color:#aa0000"><h3>{{answer.text}}</h3></li>
                         {% endif %}
                     {% else %}
                         <li><h3>{{answer.text}}</h3></li>
@@ -33,6 +25,6 @@
             {% endfor %}
         </div>
     {% endfor %}
-    
-</body>
-</html>
+</div>
+
+{% endblock content %}

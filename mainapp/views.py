@@ -42,13 +42,16 @@ def calculator_f(request):
             chisl.append(request.GET.get("chisl" + str(i)))
             znam.append(request.GET.get("znam" + str(i)))
             znak.append(request.GET.get("znak" + str(i)))
-            print(request.GET.get("znak" + str(i)))
+            # print(request.GET.get("znak" + str(i)))
             cel.append(request.GET.get("celoe" + str(i)))
         chisl.append(request.GET.get("chisl" + str(i + 1)))
         znam.append(request.GET.get("znam" + str(i + 1)))
         cel.append(request.GET.get("celoe" + str(i + 1)))
         text_primer = ""
         for i in range(int(count_drob) - 1):
+            if cel[i]:
+                text_primer += cel[i]
+                text_primer += " "
             text_primer += chisl[i]
             text_primer += "/"
             text_primer += znam[i]
@@ -56,18 +59,26 @@ def calculator_f(request):
             # print(znak[i], int(count_drob) - 1, znak)
             text_primer += znak[i]
             text_primer += " "
+        if cel[i + 1]:
+            text_primer += cel[i + 1]
+            text_primer += " "
         text_primer += chisl[i + 1]
         text_primer += "/"
         text_primer += znam[i + 1]
-        # print(chisl)
-        # print(znam)
-        # print(znak)
-        # print(text_primer)
+        print(cel)
+        print(chisl)
+        print(znam)
+        print(znak)
+        print(text_primer)
         answer2 = message_processing(text_primer)
+        print(answer2)
         znak.append("")
         primer = [
             [i, cel[i], chisl[i], znam[i], znak[i]] for i in range(int(count_drob))
         ]
+
+        if answer2 == "-0":
+            answer2 = "0"
 
         context = {
             "answer2": answer2,

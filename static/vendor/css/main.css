@@ -23,3 +23,95 @@
 .btn-primary{
     background-color: #EFFD7D;
 }
+
+.heading1{
+    font-size: 2rem;
+}
+
+.form_calc{
+    display: flex;
+    flex-direction: column;
+    font-size: 3rem;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.form_calc input{
+    font-size: 2rem;
+    width: 50%;
+    
+}
+
+.chats{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    width: 20%;
+}
+
+.chat{
+    border: 1px black solid;
+    width: 10rem;
+    height: 10rem;
+}
+
+.chat_selected{
+    border: 1px black solid;
+    width: 10rem;
+    height: 10rem;
+    background-color: darkcyan;
+}
+
+.messages_companion{
+    display: flex;
+    /* выравнивание по горизонатали */
+    justify-content: flex-start; 
+    /* выравнивание по вертикали */
+    align-items: start;
+    flex-direction: column;
+    height: 6rem;
+}
+
+.messages_your{
+    display: flex;
+    /* выравнивание по горизонатали */
+    justify-content: flex-start; 
+    /* выравнивание по вертикали */
+    align-items: end;
+    flex-direction: column;
+    height: 6rem;
+}
+
+.message{
+    border: 1px black solid;
+}
+
+.messages-block{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.send_message{
+    display: flex;
+    justify-content: flex-start; 
+    position: fixed;
+    bottom: 0;
+}
+
+.content-chat{
+    display: flex;
+    height: 100%;
+}
+
+
+
+header{
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+}
+main{
+    height: 95vh;
+}
